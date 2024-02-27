@@ -1,12 +1,19 @@
 pipeline {
     agent none
+    environment {
+        TEST = "test_value"
+        TEST1 = "test_value1"
+    }
     stages {
         stage('Build') {
             agent {
                 label 'slave1'
             }
             steps {
-                sh 'sleep 10'
+                sh '''
+                    echo $TEST $TEST1
+                    sleep 5
+                '''
             }
         }
 
@@ -15,8 +22,8 @@ pipeline {
             steps {
                 sh '''
                     #!/bin/bash
-                    ls -lrt
-                    sleep 10
+                    echo $TEST $TEST1
+                    sleep 5
                 '''
             }
         }
