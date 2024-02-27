@@ -4,12 +4,21 @@ pipeline {
         TEST = "test_value"
         TEST1 = "test_value1"
     }
+
+    parameters {
+
+    }
+
     stages {
         stage('Build') {
+            environment {
+                BUILD_NAME = "my_build"
+            }
+
             steps {
                 sh '''
                     set +x
-                    echo $TEST $TEST1
+                    echo $TEST $BUILD_NAME
                     sleep 5
                 '''
             }
@@ -20,7 +29,7 @@ pipeline {
                 sh '''
                     #!/bin/bash
                     set +x
-                    echo $TEST $TEST1
+                    echo $TEST $BUILD_NAME
                     sleep 5
                 '''
             }
