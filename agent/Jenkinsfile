@@ -13,7 +13,6 @@ pipeline {
 
             steps {
                 sh '''
-                    set +x
                     echo $TEST $BUILD_NAME
                     sleep 5
                 '''
@@ -22,12 +21,9 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh '''
-                    #!/bin/bash
-                    set +x
-                    echo $TEST $BUILD_NAME
-                    sleep 5
-                '''
+                script {
+                    echo "${env.TEST}"
+                }
             }
         }
 
