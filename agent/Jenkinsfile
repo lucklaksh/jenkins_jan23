@@ -1,14 +1,11 @@
 pipeline {
-    agent none
+    agent any
     environment {
         TEST = "test_value"
         TEST1 = "test_value1"
     }
     stages {
         stage('Build') {
-            agent {
-                label 'slave1'
-            }
             steps {
                 sh '''
                     set +x
@@ -19,7 +16,6 @@ pipeline {
         }
 
         stage('Test') {
-            agent any
             steps {
                 sh '''
                     #!/bin/bash
