@@ -4,17 +4,17 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-               checkout([$class: 'GitSCM',
-                          branches: [[name: '*/main']],
-                          userRemoteConfigs: [[url: 'https://github.com/jaintpharsha/applications.git',
-                          credentialsId: 'github']]])
+                checkout([$class: 'GitSCM',
+                       branches: [[name: '*/main']],
+                       userRemoteConfigs: [[url: 'https://github.com/jaintpharsha/applications.git',
+                       credentialsId: 'github']]])
             }
         }
 
         stage('Build') {
             steps {
                 sh '''
-                   sudo apt install maven
+                   sudo apt install -y maven
                    ls -lrt
                    cd java-maven-calculator-web-app
                    mvn clean install
