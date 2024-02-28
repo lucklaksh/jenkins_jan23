@@ -36,18 +36,38 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            when {
-                expression {
-                    params.TEST == true
+        stage('TEST MULTIPLE') {
+            parallel {
+                stage('Test1') {
+                    when {
+                        expression {
+                            params.TEST == true
+                        }
+                    }
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh '''
+                                sleep 10
+                                exit 1
+                            '''
+                        }
+                    }
                 }
-            }
-            steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh '''
-                        sleep 10
-                        exit 1
-                    '''
+
+                stage('Test2') {
+                    when {
+                        expression {
+                            params.TEST == true
+                        }
+                    }
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh '''
+                                sleep 10
+                                exit 1
+                            '''
+                        }
+                    }
                 }
             }
         }
