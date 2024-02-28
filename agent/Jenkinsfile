@@ -25,6 +25,8 @@ pipeline {
             steps {
                 sh '''
                    ls -lrt
+                   cd java-maven-calculator-web-app
+                   mvn clean install
                 '''
             }
         }
