@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('CREDS') {
             steps {
-               // This is accessing credential of type username and password
+               // This is accessing credential of type username and password by lucky
                withCredentials([usernamePassword(credentialsId: 'test_up', usernameVariable: 'USERNAME', passwordVariable: 'PASS')]) {
                     echo "$USERNAME $PASS"
                     sh '''
@@ -12,7 +12,7 @@ pipeline {
                     '''
                }
 
-                // This is accessing credential of type secret text
+                // This is accessing credential of type secret text by lukcy
                 withCredentials([string(credentialsId: 'secret_text', variable: 'SECRET_TEXT')]) {
                     echo "$SECRET_TEXT"
                     sh '''
